@@ -20,3 +20,5 @@ p = Person()
 
 p.age = 100
 print(p.age)
+
+print(p.age)
