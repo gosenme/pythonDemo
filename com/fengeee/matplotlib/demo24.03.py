@@ -1,0 +1,8 @@
+import random
+import matplotlib.pyplot as plt
+
+count = 1024
+X = [random.random() * 100 for i in range(count)]
+Y = [random.random() * 100 for i in range(count)]
+plt.scatter(X, Y)
+plt.show()
