@@ -1,0 +1,7 @@
+OnInit
+Frame __init__
+Traceback (most recent call last):
+  File "D:/PycharmProjects/wxPython/demo3.py", line 24, in OnInit
+    print >> sys.stderr, "A pretend error message"  # Êä³öµ½stderr
+TypeError: unsupported operand type(s) for >>: 'builtin_function_or_method' and '_io.TextIOWrapper'. Did you mean "print(<message>, file=<output_stream>)"?
+OnInit returned false, exiting...
