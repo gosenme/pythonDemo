@@ -20,23 +20,28 @@ gl = gitlab.Gitlab(url, token)
 # for p in gl.projects.list(all=True, as_list=False):
 #    print(p.name, p.id)
 
-project_name = "seewo-iot-app-remote"
-namespace_scope = "media/ddc/dev/be"
-
-projects = gl.projects.list(search=project_name)
-for p in projects:
-    if p.namespace.get('full_path') == namespace_scope:
-        # branches = p.branches.list()
-        # print(branches)
-        # print(p)
-        result = p.repository_compare('test', 'dev')
-
-        # print("------------------------------------------------------\n")
-        print(len(result['diffs']))
-        # print("------------------------------------------------------\n")
-        for file_diff in result['diffs']:
-            pass
-            #print(file_diff)
+projects = ["seewo-iot-app-remote", "seewo-ucp-core", "seewo-iot-app-stat", "seewo-iot-app-file", "seewo-iot-app-proxy",
+            "seewo-iot-app-wake", "seewo-iot-app-admin",
+            "seewo-iot-timer-monitor"]
+for pp in projects:
+    project = gl.projects.list(search=pp)
+    # project_name = "seewo-iot-app-remote,seewo-ucp-core"
+    namespace_scope = "media/ddc/dev/be"
+    # project = gl.projects.list(search=project_name.split(","))
+    for p in project:
+        if p.namespace.get('full_path') == namespace_scope:
+            # branches = p.branches.list()
+            # print(branches)
+            # print(p)
+            result = p.repository_compare('test', 'dev')
+            if len(result['diffs']) > 0:
+                print("------------------------------------------------------>")
+                print(p.name)
+                print(len(result['diffs']))
+                # print("------------------------------------------------------>")
+                for file_diff in result['diffs']:
+                    pass
+            # print(file_diff)
             # 获取文件完整路径
         #     old_path = file_diff.get('old_path')
         #     # 不是新文件
