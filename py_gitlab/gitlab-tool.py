@@ -3,7 +3,6 @@ __Author__ = "gseng"
 __Date__ = '2020/02/29 13:46'
 
 import gitlab
-import string_tool
 
 url = "https://gitlab.gz.cvte.cn"
 token = "ABAE9gRzA1MpDmrpwnzb"
@@ -35,12 +34,16 @@ for pp in projects:
             # print(p)
             result = p.repository_compare('test', 'dev')
             if len(result['diffs']) > 0:
-                print("------------------------------------------------------>")
-                print(p.name)
-                print(len(result['diffs']))
                 # print("------------------------------------------------------>")
-                for file_diff in result['diffs']:
-                    pass
+                print(p.name + "变量数量:" + str(len(result['diffs'])))
+                #if p.name == 'seewo-iot-app-admin':
+                r = p.mergerequests.create({'source_branch': 'dev', 'target_branch': 'test', 'title': '1.1.8 A1合并'})
+                print(r.web_url)
+                # print("------------------------------------------------------>")
+            else:
+                print(p.name + ":代码没有变更")
+                # for file_diff in result['diffs']:
+                # pass
             # print(file_diff)
             # 获取文件完整路径
         #     old_path = file_diff.get('old_path')
