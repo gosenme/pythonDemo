@@ -5,9 +5,8 @@ __Author__ = "gseng"
 __Date__ = '2020/06/09 13:46'
 
 import MySQLdb
+import pymysql
 import os
-import sys
-
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
@@ -17,21 +16,26 @@ class Diff:
         self.test_host = '172.18.80.58'
         self.test_user_name = 'seewo_remote'
         self.test_password = 'seewo_remote@cvte'
-        self.test_port = '3307'
+        self.test_port = 3307
         self.test_dbname = 'seewo_iot_app_remote'
 
         self.online_host = 'sr-test-mysql-master-2.gz.cvte.cn'
         self.online_user_name = 'seewo_remote'
         self.online_password = 'seewo_remote@cvte'
-        self.online_port = '3307'
+        self.online_port = 3307
+        self.online_dbname = 'seewo_iot_app_remote'
 
     def get_data(self, env, sql):
         if env == "test":
-            conn = MySQLdb.connect(self.test_host, self.test_user_name, self.test_password, self.test_dbname,
-                                   charset="utf-8")
+            # conn = MySQLdb.connect(self.test_host, self.test_user_name, self.test_password, self.test_dbname,encoding='UTF-8')
+            conn = pymysql.connect(host=self.test_host, port=self.test_port, user=self.test_user_name,
+                                   passwd=self.test_password,
+                                   db=self.test_dbname)
         else:
-            conn = MySQLdb.connect(self.online_host, self.online_user_name, self.online_password, self.online_dbname,
-                                   charset="utf-8")
+            # conn = MySQLdb.connect(self.online_host, self.online_user_name, self.online_password, self.online_dbname)
+            conn = pymysql.connect(host=self.online_host, port=self.online_port, user=self.online_user_name,
+                                   passwd=self.online_password,
+                                   db=self.online_dbname)
 
         cur = conn.cursor()
         cur.execute(sql)
