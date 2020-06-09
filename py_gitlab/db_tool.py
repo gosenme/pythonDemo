@@ -141,7 +141,6 @@ if __name__ == '__main__':
     online_table_list = diff.to_list(diff.get_data('online', "show tables"))
     both_have_t = diff.both_list(test_table_list, online_table_list)
     print("-----------------  比较两个database的table差异  begin --------------------------")
-    print("\r")
     # 调用比较结果函数
     diff.result(test_table_list, online_table_list)
     print("\r")
