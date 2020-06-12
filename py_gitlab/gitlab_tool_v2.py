@@ -35,6 +35,9 @@ def compare_project():
                                  'target_branch': project["target_branch"],
                                  'title': mergeRequestsTitle})
                             print('提交PR链接:%s' % pr.web_url)
+                    else:
+                        for r in mrs:
+                            print("open 中的PR" + r.web_url)
                     for commit in result['commits']:
                         if not commit['title'].find('Merge branch') >= 0:
                             print('负责人：' + commit['author_email'] + ' 变更内容： ' + commit['title'])
